@@ -1,61 +1,71 @@
 
 // EVERYTHING BELOW THIS LINE IS DEALING WITH THE SEARCH BAR FUNCITONALITY
-
-// fetch("https://api.countrystatecity.in/v1/countries/", {
-//     headers: {
-//         "X-CSCAPI-KEY": "NE03N3E0Y0dxMnRiMzJXV0xubWNRaWpNVkJOZExEOEpRdWd1dGZWYw=="
-//     }})
-//     .then(response => response.json())
-//     .then(result => console.log(result))
-
 // attempts to get the data from the fetch API into a look up dictionary to allow for comparison between user input, country name, and country iso2.
 // iso2 required to get country specific information (capital and currency) from the API
-var data = fetch("https://api.countrystatecity.in/v1/countries/", {
-    headers: {
-        "X-CSCAPI-KEY": "NE03N3E0Y0dxMnRiMzJXV0xubWNRaWpNVkJOZExEOEpRdWd1dGZWYw=="
-}})
-    .then(response => response.json());
+var myLookUpDictionary = {};
+var countryCode = {};
+var searchBarInputEl = document.querySelector("#search-bar-input");
+var searchBarErrorEl = document.querySelector("search-bar-error");
 
-var myLookUpDictionary = [];
-
-function myAlgo(data) {
-    for (var i = 0; i < data.length; i++){
-        myLookUpDictionary.push({
-            "name": data[i].name,
-            "iso2": data[i].iso2
+var createLookUpDictionary = function() {
+    fetch("https://api.countrystatecity.in/v1/countries/", {
+        headers: {
+            "X-CSCAPI-KEY": "NE03N3E0Y0dxMnRiMzJXV0xubWNRaWpNVkJOZExEOEpRdWd1dGZWYw=="
+        }})
+        .then(function(response) {
+            response.json().then(function(data){
+                myLookUpDictionary = data;
+                //console.log(myLookUpDictionary);
+            });
         });
-        // data[i].name = myLookUpDictionary[i].name;
-
-        // myLookUpDictionary[data[i].name] = data[i].iso2
-        console.log(myLookUpDictionary);
-    }
 }
 
-myAlgo();
+createLookUpDictionary();
+
+var getCountryData = function(countryCode) {
+    fetch("https://api.countrystatecity.in/v1/countries/" + countryCode, {
+                    headers: {
+                        "X-CSCAPI-KEY": "NE03N3E0Y0dxMnRiMzJXV0xubWNRaWpNVkJOZExEOEpRdWd1dGZWYw=="
+                    }})
+                    .then(function(response) {
+                        response.json().then(function(data){
+                            var countryCapital = data.capital;
+                            var countryCurrency = data.currency;
+                            displayCountryCapital(countryCapital);
+                            displayCountryCurrency(countryCurrency);
+                    });
+                });
+}
 
 // logic to determine if user input into search bar can be matched with a iso2 country code from the API
 var searchInputCheck = function() {
     // if text input is blank, then the blank div above the search bar should be populated with an error message: "Please enter a country name."
-    
-    // if the text input is not blank, then the div about the search bar should be made blank ("") and the following loop should run
-
-    // loop through myLookUpDictionary to see if user input matches with any country names
-        // if a match is found, then the code should pull in the country name and the iso2 country code from the myLookUpDictionary and populate the variables
-
-    var currentCountryName = ;
-    var currentCountryCode = ; 
-    
-    // there should then be another call made to the API to get the capital and currency information using the dynamically generated link below
-    var apiCountryCall = "https://api.countrystatecity.in/v1/countries/['currentCountryCode']";
-
-        // if there is no match found, then the search bar results area should populate with only the following error message: "No results found. Please check that the country name is spelled correctly or try a different country name!"
-
+    if (searchBarInputEl.value === "") {
+        searchBarErrorEl.text = "Please enter a country name.";
+    } else {
+        // if the text input is not blank, then the div about the search bar should be made blank ("") and the following loop should run
+        searchBarErrorEl.text = "";
+        // loop through myLookUpDictionary to see if user input matches with any country names
+        for (var i = 0; i < myLookUpDictionary.length; i++) {
+            if (searchBarInputEl.value === myLookUpDictionary[i].name) {
+                // if a match is found, then the code should pull in the country name and the iso2 country code from the myLookUpDictionary and populate the variables
+                countryCode = myLookUpDictionary[i].iso2;
+                getCountryData;
+            } else {
+                // if there is no match found, then the error div above the search bar area should populate with only the following error message: "No results found. Please check that the country name is spelled correctly or try a different country name!"
+                searchBarErrorEl.text = "No results found. Please check that the country name is spelled correctly or try a different country name!";
+            }
+        }
+    }
 }
 
 // if the "Submit" button is clicked, then the input field text should be used to find the matching country name and country code (iso2)
 submitBtn.addEventListener("click", searchInputCheck());
 
-// the below information was taken from the API 
+
+
+
+// the below information was taken from the API and is being kept while in development just in case it's needed
 
 // name: 'Afghanistan', iso2: 'AF'
 // name: 'Aland Islands', iso2: 'AX'
