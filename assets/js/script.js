@@ -1,12 +1,11 @@
-
 // EVERYTHING BELOW THIS LINE IS DEALING WITH THE SEARCH BAR FUNCITONALITY
 // attempts to get the data from the fetch API into a look up dictionary to allow for comparison between user input, country name, and country iso2.
 // iso2 required to get country specific information (capital and currency) from the API
 var myLookUpDictionary = {};
 var countryCode = {};
-var countryName = {};
-var countryCapital = {};
-var countryCurrency = {};
+var countryName = "";
+var countryCapital = "";
+var countryCurrency = "";
 
 var searchBarInputEl = document.querySelector("#search-bar-input");
 var searchBarErrorEl = document.querySelector("search-bar-error");
@@ -35,9 +34,9 @@ var getCountryData = function(countryCode) {
                     }})
                     .then(function(response) {
                         response.json().then(function(data){
-                            var countryName = data.name;
-                            var countryCapital = data.capital;
-                            var countryCurrency = data.currency;
+                            countryName = data.name;
+                            countryCapital = data.capital;
+                            countryCurrency = data.currency;
                             displayCountryName(countryName);
                             displayCountryPicture(countryName);
                             displayCountryCapital(countryCapital);
