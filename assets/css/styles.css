@@ -2,6 +2,6 @@
     font-size: 65px;
 }
 
-body {
-    background-color: black;
+.top-bar {
+    padding: 2rem;
 }
