@@ -10,6 +10,7 @@ var countryCurrency = "";
 var searchBarInputEl = document.querySelector("#search-bar-input");
 var searchBarErrorEl = document.querySelector("#search-bar-error");
 var searchBtnEl = document.querySelector("#search-btn");
+var capitalNameEl = document.querySelector("#capital-name-container");
 
 // function creates the look up dictionary to compare user input against the country name in order to obtain the country code(iso2)
 var createLookUpDictionary = function () {
@@ -53,8 +54,8 @@ var getCountryData = function (countryCode) {
       //console.log(countryName);
       //console.log(countryCapital);
       //console.log(countryCurrency);
-      displayCountryName(countryName);
-      displayCountryPicture(countryName);
+      //displayCountryName(countryName);
+      //displayCountryPicture(countryName);
       displayCountryCapital(countryCapital);
       displayCountryCurrency(countryCurrency);
     });
@@ -83,6 +84,22 @@ var searchInputCheck = function () {
       }
     }
   }
+};
+
+// displays the country capital when the search function is run
+var displayCountryCapital = function () {
+  var capitalHeader = document.createElement("div");
+  capitalHeader.addClass = "border-check";
+  capitalHeader.setAttribute = "capital-name-header";
+  capitalHeader.innerHTML = "<h4>Capital</h4>";
+
+  var capitalName = document.createElement("div");
+  capitalName.addClass = "border-check";
+  capitalName.setAttribute = "capital-name";
+  capitalName.innerHTML = "<p>" + countryCapital + "</p>";
+
+  capitalNameEl.appendChild(capitalHeader);
+  capitalNameEl.appendChild(capitalName);
 };
 
 createLookUpDictionary();

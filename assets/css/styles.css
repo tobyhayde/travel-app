@@ -1,3 +1,7 @@
 .menu-text {
   font-size: xx-large;
 }
+
+.border-check {
+  border: 5px solid orange;
+}
