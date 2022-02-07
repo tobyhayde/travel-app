@@ -5,3 +5,14 @@
 .top-bar {
     padding: 2rem;
 }
+
+#footer{
+    height: 50px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    line-height: 50px;
+    color: #aaa;
+    text-align: center;
+    width: 100%;
+}
