@@ -11,6 +11,7 @@ var searchBarInputEl = document.querySelector("#search-bar-input");
 var searchBarErrorEl = document.querySelector("#search-bar-error");
 var searchBtnEl = document.querySelector("#search-btn");
 var capitalNameEl = document.querySelector("#capital-name-container");
+var currencyNameEl = document.querySelector("#currency-name-container");
 
 // function creates the look up dictionary to compare user input against the country name in order to obtain the country code(iso2)
 var createLookUpDictionary = function () {
@@ -52,11 +53,10 @@ var getCountryData = function (countryCode) {
       countryCapital = data.capital;
       countryCurrency = data.currency;
       //console.log(countryName);
-      //console.log(countryCapital);
       //console.log(countryCurrency);
       //displayCountryName(countryName);
-      //displayCountryPicture(countryName);
       displayCountryCapital(countryCapital);
+      //displayCountryPicture(countryName);
       displayCountryCurrency(countryCurrency);
     });
   });
@@ -89,17 +89,33 @@ var searchInputCheck = function () {
 // displays the country capital when the search function is run
 var displayCountryCapital = function () {
   var capitalHeader = document.createElement("div");
-  capitalHeader.addClass = "border-check";
+  //capitalHeader.className = NEED TO BE DECIDED
   capitalHeader.setAttribute = "capital-name-header";
-  capitalHeader.innerHTML = "<h4>Capital</h4>";
+  capitalHeader.innerHTML = "<h4>Capital City</h4>";
 
   var capitalName = document.createElement("div");
-  capitalName.addClass = "border-check";
+  //capitalHeader.className = NEED TO BE DECIDED
   capitalName.setAttribute = "capital-name";
   capitalName.innerHTML = "<p>" + countryCapital + "</p>";
 
   capitalNameEl.appendChild(capitalHeader);
   capitalNameEl.appendChild(capitalName);
+};
+
+// displays the country currency when the search function is run
+var displayCountryCurrency = function () {
+  var currencyHeader = document.createElement("div");
+  //capitalHeader.className = NEED TO BE DECIDED
+  currencyHeader.setAttribute = "currency-name-header";
+  currencyHeader.innerHTML = "<h4>Currency</h4>";
+
+  var currencyName = document.createElement("div");
+  //capitalHeader.className = NEED TO BE DECIDED
+  currencyName.setAttribute = "currency-name";
+  currencyName.innerHTML = "<p>" + countryCurrency + "</p>";
+
+  currencyNameEl.appendChild(currencyHeader);
+  currencyNameEl.appendChild(currencyName);
 };
 
 createLookUpDictionary();
