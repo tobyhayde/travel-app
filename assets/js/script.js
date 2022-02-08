@@ -25,6 +25,7 @@ var imageDisplayEl = document.querySelector("#image-display-container");
 var resetSearchInput = function () {
   var previousCountryNameEl = document.querySelector("#country-name");
   var previousCountryName = document.querySelector("#country-name-container");
+  var previousCountryImage = document.querySelector("#image-display-container");
   var previousCountryCapital = document.querySelector(
     "#capital-name-container"
   );
@@ -34,6 +35,7 @@ var resetSearchInput = function () {
 
   if (previousCountryNameEl) {
     previousCountryName.innerHTML = "";
+    previousCountryImage.innerHTML = "";
     previousCountryCapital.innerHTML = "";
     previousCountryCurrency.innerHTML = "";
   }
