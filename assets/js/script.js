@@ -6,6 +6,12 @@ var countryCode = "";
 var countryName = "";
 var countryCapital = "";
 var countryCurrency = "";
+var imageSource = "";
+var imageSrcAltText = "";
+var imageSrcAuthor = "";
+var imageSrcAuthorURL = "";
+var pictureData = [];
+var pictureDataSrc = "";
 
 var searchBarInputEl = document.querySelector("#search-bar-input");
 var searchBarErrorEl = document.querySelector("#search-bar-error");
@@ -13,6 +19,7 @@ var searchBtnEl = document.querySelector("#search-btn");
 var capitalNameEl = document.querySelector("#capital-name-container");
 var currencyNameEl = document.querySelector("#currency-name-container");
 var countryNameEl = document.querySelector("#country-name-container");
+var imageDisplayEl = document.querySelector("#image-display-container");
 
 // if another search was preformed, this removes all previously created elements from the previous search
 var resetSearchInput = function () {
@@ -70,10 +77,36 @@ var getCountryData = function (countryCode) {
       countryName = data.name;
       countryCapital = data.capital;
       countryCurrency = data.currency;
+      getCountryImage(countryName);
       displayCountryName(countryName);
       displayCountryCapital(countryCapital);
-      //displayCountryPicture(countryName);
       displayCountryCurrency(countryCurrency);
+    });
+  });
+};
+
+// this sets the data that is retrieved from the Pexels API
+var getCountryImage = function () {
+  fetch(
+    "https://api.pexels.com/v1/search?query=" + countryName + "&per_page=1",
+    {
+      headers: {
+        Authorization:
+          "563492ad6f917000010000018a9b5cfabca64242bcbb90cb97ec70ca",
+      },
+    }
+  ).then(function (response) {
+    response.json().then(function (data) {
+      // pushes the data into an array
+      pictureData = data.photos;
+      pictureDataSrc = pictureData[0].src;
+
+      // grabs data from the array
+      imageSource = pictureDataSrc.medium;
+      imageSrcAltText = pictureData[0].alt;
+      imageSrcAuthor = pictureData[0].photographer;
+      imageSrcAuthorURL = pictureData[0].photographer_url;
+      displayCountryImage(countryName);
     });
   });
 };
@@ -106,11 +139,31 @@ var searchInputCheck = function () {
 // displays the country name when the search function is run
 var displayCountryName = function () {
   var countryDisplayName = document.createElement("div");
-  //capitalHeader.className = NEED TO BE DECIDED
+  //countryDisplayName.className = NEED TO BE DECIDED
   countryDisplayName.setAttribute("id", "country-name");
   countryDisplayName.innerHTML = "<h3>" + countryName + "</h3>";
 
   countryNameEl.appendChild(countryDisplayName);
+};
+
+// displays an image relating to the country searched for by the user
+var displayCountryImage = function () {
+  var countryImageDisplay = document.createElement("img");
+  countryImageDisplay.setAttribute("id", "country-image");
+  countryImageDisplay.setAttribute("src", "imageSource");
+  countryImageDisplay.setAttribute("alt", "imageSrcAltText");
+
+  var countryImageCopyright = document.createElement("p");
+  countryImageCopyright.setAttribute("id", "image-copyright");
+  countryImageCopyright.innerHTML =
+    "<a href='https://www.pexels.com'>Photos provided by Pexels.</a> Photo taken by <a href='" +
+    imageSrcAuthorURL +
+    "'>" +
+    imageSrcAuthor +
+    "</a>";
+
+  imageDisplayEl.appendChild(countryImageDisplay);
+  imageDisplayEl.appendChild(countryImageCopyright);
 };
 
 // displays the country capital when the search function is run
