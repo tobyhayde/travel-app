@@ -14,6 +14,11 @@ var capitalNameEl = document.querySelector("#capital-name-container");
 var currencyNameEl = document.querySelector("#currency-name-container");
 var countryNameEl = document.querySelector("#country-name-container");
 
+//var resetSearchInput = function () {
+ // countryName = "";
+  //countryCapital = "";
+ // countryCurrency = ""
+//}
 // function creates the look up dictionary to compare user input against the country name in order to obtain the country code(iso2)
 var createLookUpDictionary = function () {
   // checks to see if the user already has a copy of the look up dictionary that the app can use. If not, then it will save a copy to localStorage
@@ -114,12 +119,12 @@ var displayCountryCapital = function () {
 // displays the country currency when the search function is run
 var displayCountryCurrency = function () {
   var currencyHeader = document.createElement("div");
-  //capitalHeader.className = NEED TO BE DECIDED
+  currencyHeader.className = "em"
   currencyHeader.setAttribute = "currency-name-header";
   currencyHeader.innerHTML = "<h5>Currency:</h5>";
 
   var currencyName = document.createElement("div");
-  //capitalHeader.className = NEED TO BE DECIDED
+  currencyName.className = "strong"
   currencyName.setAttribute = "currency-name";
   currencyName.innerHTML = "<p>" + countryCurrency + "</p>";
 
