@@ -12,6 +12,7 @@ var searchBarErrorEl = document.querySelector("#search-bar-error");
 var searchBtnEl = document.querySelector("#search-btn");
 var capitalNameEl = document.querySelector("#capital-name-container");
 var currencyNameEl = document.querySelector("#currency-name-container");
+var countryNameEl = document.querySelector("#country-name-container");
 
 // function creates the look up dictionary to compare user input against the country name in order to obtain the country code(iso2)
 var createLookUpDictionary = function () {
@@ -52,9 +53,7 @@ var getCountryData = function (countryCode) {
       countryName = data.name;
       countryCapital = data.capital;
       countryCurrency = data.currency;
-      //console.log(countryName);
-      //console.log(countryCurrency);
-      //displayCountryName(countryName);
+      displayCountryName(countryName);
       displayCountryCapital(countryCapital);
       //displayCountryPicture(countryName);
       displayCountryCurrency(countryCurrency);
@@ -84,6 +83,16 @@ var searchInputCheck = function () {
       }
     }
   }
+};
+
+// displays the country name when the search function is run
+var displayCountryName = function () {
+  var countryDisplayName = document.createElement("div");
+  //capitalHeader.className = NEED TO BE DECIDED
+  countryDisplayName.setAttribute = "country-name";
+  countryDisplayName.innerHTML = "<p>" + countryName + "</p>";
+
+  countryNameEl.appendChild(countryDisplayName);
 };
 
 // displays the country capital when the search function is run
@@ -121,4 +130,3 @@ var displayCountryCurrency = function () {
 createLookUpDictionary();
 // if the "Search" button is clicked, then the input field text should be used to find the matching country name and country code (iso2)
 searchBtnEl.addEventListener("click", searchInputCheck);
-
