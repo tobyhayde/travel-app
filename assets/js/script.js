@@ -22,6 +22,20 @@ var imageDisplayEl = document.querySelector("#image-display-container");
 // formats the input from the text search field to match it with the information from the countrystatecity api
 var formatUserInput = function () {
   searchBarInput = searchBarInputEl.value;
+
+  var words = JSON.stringify(searchBarInput.split(" "));
+  var newInput = [];
+
+  console.log(words);
+  words = JSON.parse(words.toLowerCase());
+  console.log(words);
+  for (var i = 0; i < words.length; i++) {
+    var chars = words[i].split("");
+    chars[0].toUpperCase();
+    console.log(chars[0]);
+    chars = JSON.parse(chars.join(""));
+    console.log(chars);
+  }
 };
 
 // if another search was preformed, this removes all previously created elements from the previous search
