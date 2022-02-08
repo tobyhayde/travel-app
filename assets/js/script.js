@@ -14,11 +14,23 @@ var capitalNameEl = document.querySelector("#capital-name-container");
 var currencyNameEl = document.querySelector("#currency-name-container");
 var countryNameEl = document.querySelector("#country-name-container");
 
-//var resetSearchInput = function () {
- // countryName = "";
-  //countryCapital = "";
- // countryCurrency = ""
-//}
+// if another search was preformed, this removes all previously created elements from the previous search
+var resetSearchInput = function () {
+  var previousCountryNameEl = document.querySelector("#country-name");
+  var previousCountryName = document.querySelector("#country-name-container");
+  var previousCountryCapital = document.querySelector(
+    "#capital-name-container"
+  );
+  var previousCountryCurrency = document.querySelector(
+    "#currency-name-container"
+  );
+
+  if (previousCountryNameEl) {
+    previousCountryName.innerHTML = "";
+    previousCountryCapital.innerHTML = "";
+    previousCountryCurrency.innerHTML = "";
+  }
+};
 // function creates the look up dictionary to compare user input against the country name in order to obtain the country code(iso2)
 var createLookUpDictionary = function () {
   // checks to see if the user already has a copy of the look up dictionary that the app can use. If not, then it will save a copy to localStorage
@@ -68,6 +80,7 @@ var getCountryData = function (countryCode) {
 
 // logic to determine if user input into search bar can be matched with a iso2 country code from the API
 var searchInputCheck = function () {
+  resetSearchInput();
   // if text input is blank, then the blank div by the search bar should be populated with an error message: "Please enter a country name."
   if (!searchBarInputEl.value) {
     searchBarErrorEl.textContent = "Please enter a country name.";
@@ -94,7 +107,7 @@ var searchInputCheck = function () {
 var displayCountryName = function () {
   var countryDisplayName = document.createElement("div");
   //capitalHeader.className = NEED TO BE DECIDED
-  countryDisplayName.setAttribute = "country-name";
+  countryDisplayName.setAttribute("id", "country-name");
   countryDisplayName.innerHTML = "<h3>" + countryName + "</h3>";
 
   countryNameEl.appendChild(countryDisplayName);
@@ -104,12 +117,12 @@ var displayCountryName = function () {
 var displayCountryCapital = function () {
   var capitalHeader = document.createElement("div");
   //capitalHeader.className = NEED TO BE DECIDED
-  capitalHeader.setAttribute = "capital-name-header";
+  capitalHeader.setAttribute("id", "capital-name-header");
   capitalHeader.innerHTML = "<h5>Capital City:</h5>";
 
   var capitalName = document.createElement("div");
   //capitalHeader.className = NEED TO BE DECIDED
-  capitalName.setAttribute = "capital-name";
+  capitalName.setAttribute("id", "capital-name");
   capitalName.innerHTML = "<p>" + countryCapital + "</p>";
 
   capitalNameEl.appendChild(capitalHeader);
@@ -119,13 +132,13 @@ var displayCountryCapital = function () {
 // displays the country currency when the search function is run
 var displayCountryCurrency = function () {
   var currencyHeader = document.createElement("div");
-  currencyHeader.className = "em"
-  currencyHeader.setAttribute = "currency-name-header";
+  currencyHeader.className = "em";
+  currencyHeader.setAttribute("id", "currency-name-header");
   currencyHeader.innerHTML = "<h5>Currency:</h5>";
 
   var currencyName = document.createElement("div");
-  currencyName.className = "strong"
-  currencyName.setAttribute = "currency-name";
+  currencyName.className = "strong";
+  currencyName.setAttribute("id", "currency-name");
   currencyName.innerHTML = "<p>" + countryCurrency + "</p>";
 
   currencyNameEl.appendChild(currencyHeader);
