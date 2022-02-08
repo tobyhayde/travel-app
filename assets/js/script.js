@@ -90,7 +90,7 @@ var displayCountryName = function () {
   var countryDisplayName = document.createElement("div");
   //capitalHeader.className = NEED TO BE DECIDED
   countryDisplayName.setAttribute = "country-name";
-  countryDisplayName.innerHTML = "<p>" + countryName + "</p>";
+  countryDisplayName.innerHTML = "<h3>" + countryName + "</h3>";
 
   countryNameEl.appendChild(countryDisplayName);
 };
