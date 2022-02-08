@@ -19,7 +19,8 @@ var currencyNameEl = document.querySelector("#currency-name-container");
 var countryNameEl = document.querySelector("#country-name-container");
 var imageDisplayEl = document.querySelector("#image-display-container");
 
-// formats the input from the text search field to match it with the name key/value pair from the countrystatecity api
+// formats the input from the text search field to match it with the name key/value pair from the countrystatecity api.
+// I used the format of the code from this stackoverflow chain: https://stackoverflow.com/questions/32589197/how-can-i-capitalize-the-first-letter-of-each-word-in-a-string-using-javascript
 var formatUserInput = function () {
   searchBarInput = searchBarInputEl.value;
   var splitWords = searchBarInput.toLowerCase().split(" ");
