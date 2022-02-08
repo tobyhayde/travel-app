@@ -95,6 +95,9 @@ var getCountryData = function (countryCode) {
       displayCountryName(countryName);
       displayCountryCapital(countryCapital);
       displayCountryCurrency(countryCurrency);
+
+      // removes the user input from the search text field
+      searchBarInputEl.value = "";
     });
   });
 };
