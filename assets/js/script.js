@@ -1,6 +1,3 @@
-// EVERYTHING BELOW THIS LINE IS DEALING WITH THE SEARCH BAR FUNCITONALITY
-// attempts to get the data from the fetch API into a look up dictionary to allow for comparison between user input, country name, and country iso2.
-// iso2 required to get country specific information (capital and currency) from the API
 var myLookUpDictionary = [];
 var countryCode = "";
 var countryName = "";
