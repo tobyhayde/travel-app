@@ -9,6 +9,7 @@ var imageSrcAuthor = "";
 var imageSrcAuthorURL = "";
 var pictureData = [];
 var pictureDataSrc = "";
+var searchBarInput = "";
 
 var searchBarInputEl = document.querySelector("#search-bar-input");
 var searchBarErrorEl = document.querySelector("#search-bar-error");
@@ -17,6 +18,11 @@ var capitalNameEl = document.querySelector("#capital-name-container");
 var currencyNameEl = document.querySelector("#currency-name-container");
 var countryNameEl = document.querySelector("#country-name-container");
 var imageDisplayEl = document.querySelector("#image-display-container");
+
+// formats the input from the text search field to match it with the information from the countrystatecity api
+var formatUserInput = function () {
+  searchBarInput = searchBarInputEl.value;
+};
 
 // if another search was preformed, this removes all previously created elements from the previous search
 var resetSearchInput = function () {
@@ -119,6 +125,8 @@ var searchInputCheck = function () {
   } else {
     // if the text input is not blank, then the div by the search bar should be made blank ("") and the following loop should run
     searchBarErrorEl.textContent = "";
+    // calls the function to reformat user input in case it doesn't match the myLookUpDictionary names
+    formatUserInput();
     // loop through myLookUpDictionary to see if user input matches with any country names
     for (var i = 0; i < myLookUpDictionary.length + 1; i++) {
       if (i === 250) {
