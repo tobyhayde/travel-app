@@ -150,8 +150,8 @@ var displayCountryName = function () {
 var displayCountryImage = function () {
   var countryImageDisplay = document.createElement("img");
   countryImageDisplay.setAttribute("id", "country-image");
-  countryImageDisplay.setAttribute("src", "imageSource");
-  countryImageDisplay.setAttribute("alt", "imageSrcAltText");
+  countryImageDisplay.setAttribute("src", imageSource);
+  countryImageDisplay.setAttribute("alt", imageSrcAltText);
 
   var countryImageCopyright = document.createElement("p");
   countryImageCopyright.setAttribute("id", "image-copyright");
