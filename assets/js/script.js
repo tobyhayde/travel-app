@@ -100,7 +100,7 @@ var displayCountryCapital = function () {
   var capitalHeader = document.createElement("div");
   //capitalHeader.className = NEED TO BE DECIDED
   capitalHeader.setAttribute = "capital-name-header";
-  capitalHeader.innerHTML = "<h4>Capital City</h4>";
+  capitalHeader.innerHTML = "<h5>Capital City:</h5>";
 
   var capitalName = document.createElement("div");
   //capitalHeader.className = NEED TO BE DECIDED
@@ -116,7 +116,7 @@ var displayCountryCurrency = function () {
   var currencyHeader = document.createElement("div");
   //capitalHeader.className = NEED TO BE DECIDED
   currencyHeader.setAttribute = "currency-name-header";
-  currencyHeader.innerHTML = "<h4>Currency</h4>";
+  currencyHeader.innerHTML = "<h5>Currency:</h5>";
 
   var currencyName = document.createElement("div");
   //capitalHeader.className = NEED TO BE DECIDED
