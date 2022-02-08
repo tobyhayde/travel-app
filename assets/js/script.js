@@ -19,23 +19,17 @@ var currencyNameEl = document.querySelector("#currency-name-container");
 var countryNameEl = document.querySelector("#country-name-container");
 var imageDisplayEl = document.querySelector("#image-display-container");
 
-// formats the input from the text search field to match it with the information from the countrystatecity api
+// formats the input from the text search field to match it with the name key/value pair from the countrystatecity api
 var formatUserInput = function () {
   searchBarInput = searchBarInputEl.value;
+  var splitWords = searchBarInput.toLowerCase().split(" ");
 
-  var words = JSON.stringify(searchBarInput.split(" "));
-  var newInput = [];
-
-  console.log(words);
-  words = JSON.parse(words.toLowerCase());
-  console.log(words);
-  for (var i = 0; i < words.length; i++) {
-    var chars = words[i].split("");
-    chars[0].toUpperCase();
-    console.log(chars[0]);
-    chars = JSON.parse(chars.join(""));
-    console.log(chars);
+  for (var i = 0; i < splitWords.length; i++) {
+    splitWords[i] =
+      splitWords[i].charAt(0).toUpperCase() + splitWords[i].substring(1);
   }
+
+  searchBarInput = splitWords.join(" ");
 };
 
 // if another search was preformed, this removes all previously created elements from the previous search
@@ -147,8 +141,9 @@ var searchInputCheck = function () {
         // if there is no match found, then the error div by the search bar area should populate with only the following error message: "No results found. Please check that the country name is spelled correctly or try a different country name!"
         searchBarErrorEl.textContent =
           "No results found. Please check that the country name is spelled correctly or try a different country name!";
-      } else if (searchBarInputEl.value === myLookUpDictionary[i].name) {
+      } else if (searchBarInput === myLookUpDictionary[i].name) {
         // if a match is found, then the code should pull in the country name and the iso2 country code from the myLookUpDictionary and populate the variables
+        console.log(searchBarInput);
         countryCode = myLookUpDictionary[i].iso2;
         getCountryData(countryCode);
         break;
