@@ -9,6 +9,7 @@ var imageSrcAuthor = "";
 var imageSrcAuthorURL = "";
 var pictureData = [];
 var pictureDataSrc = "";
+var searchBarInput = "";
 
 var searchBarInputEl = document.querySelector("#search-bar-input");
 var searchBarErrorEl = document.querySelector("#search-bar-error");
@@ -17,6 +18,20 @@ var capitalNameEl = document.querySelector("#capital-name-container");
 var currencyNameEl = document.querySelector("#currency-name-container");
 var countryNameEl = document.querySelector("#country-name-container");
 var imageDisplayEl = document.querySelector("#image-display-container");
+
+// formats the input from the text search field to match it with the name key/value pair from the countrystatecity api.
+// I used the format of the code from this stackoverflow chain: https://stackoverflow.com/questions/32589197/how-can-i-capitalize-the-first-letter-of-each-word-in-a-string-using-javascript
+var formatUserInput = function () {
+  searchBarInput = searchBarInputEl.value;
+  var splitWords = searchBarInput.toLowerCase().split(" ");
+
+  for (var i = 0; i < splitWords.length; i++) {
+    splitWords[i] =
+      splitWords[i].charAt(0).toUpperCase() + splitWords[i].substring(1);
+  }
+
+  searchBarInput = splitWords.join(" ");
+};
 
 // if another search was preformed, this removes all previously created elements from the previous search
 var resetSearchInput = function () {
@@ -80,6 +95,9 @@ var getCountryData = function (countryCode) {
       displayCountryName(countryName);
       displayCountryCapital(countryCapital);
       displayCountryCurrency(countryCurrency);
+
+      // removes the user input from the search text field
+      searchBarInputEl.value = "";
     });
   });
 };
@@ -119,14 +137,17 @@ var searchInputCheck = function () {
   } else {
     // if the text input is not blank, then the div by the search bar should be made blank ("") and the following loop should run
     searchBarErrorEl.textContent = "";
+    // calls the function to reformat user input in case it doesn't match the myLookUpDictionary names
+    formatUserInput();
     // loop through myLookUpDictionary to see if user input matches with any country names
     for (var i = 0; i < myLookUpDictionary.length + 1; i++) {
       if (i === 250) {
         // if there is no match found, then the error div by the search bar area should populate with only the following error message: "No results found. Please check that the country name is spelled correctly or try a different country name!"
         searchBarErrorEl.textContent =
           "No results found. Please check that the country name is spelled correctly or try a different country name!";
-      } else if (searchBarInputEl.value === myLookUpDictionary[i].name) {
+      } else if (searchBarInput === myLookUpDictionary[i].name) {
         // if a match is found, then the code should pull in the country name and the iso2 country code from the myLookUpDictionary and populate the variables
+        console.log(searchBarInput);
         countryCode = myLookUpDictionary[i].iso2;
         getCountryData(countryCode);
         break;
