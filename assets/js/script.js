@@ -282,22 +282,28 @@ savedSearchesBtnEl.onclick = function () {
   checkForSavedData();
 };
 
+// this function activates when a user clicks a saved search button. It closes the modal and runs a new search with the countryCode that is associated with the button clicked.
 var loadSavedData = function () {
+  resetSearchInput();
+  searchBarErrorEl.textContent = "";
   var savedCountryCode = this.getAttribute("id");
-  console.log(savedCountryCode);
+  countryCode = savedCountryCode;
+  savedSearchesModalEl.style.display = "none";
+  getCountryData(countryCode);
 };
 
+// checks to see if there is any saved data in localStorage
 var checkForSavedData = function () {
+  // if there is no data in localStorage or if the storage array is empty, it displays an error message in the array
   if (!savedCountrySearches || savedCountrySearches.length === 0) {
-    console.log("nothing here, brah");
     var noSavedSearches = document.createElement("div");
     noSavedSearches.setAttribute("id", "no-saved-data-message");
     noSavedSearches.innerHTML = "<p>There are no saved searches.</p>";
 
     savedSearchDisplayEl.appendChild(noSavedSearches);
   } else {
+    // if there is saved data in localStorage, it loops through them all and creates buttons that appear in the Saved Searches modal
     for (var i = 0; i < savedCountrySearches.length; i++) {
-      console.log("you found something!");
       countryName = savedCountrySearches[i].name;
       countryCode = savedCountrySearches[i].code;
       var savedSearchBox = document.createElement("button");
@@ -308,10 +314,10 @@ var checkForSavedData = function () {
       savedSearchDisplayEl.appendChild(savedSearchBox);
     }
 
+    // this section adds an event listener to each button that is created above
     var savedCountryBtnEl =
       document.getElementsByClassName("saved-country-btn");
     for (var i = 0; i < savedCountryBtnEl.length; i++) {
-      console.log(savedCountryBtnEl[i]);
       savedCountryBtnEl[i].addEventListener("click", loadSavedData, false);
     }
   }
