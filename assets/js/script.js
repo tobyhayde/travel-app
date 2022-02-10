@@ -14,7 +14,6 @@ var pictureDataSrc = "";
 
 var searchBarInput = "";
 
-var saveBtn = document.querySelector("#save-btn");
 var savedCountrySearches = [];
 var savedSearchesModalEl = document.getElementById("savedSearchesModal");
 var savedSearchesBtnEl = document.getElementById("savedSearchesBtn");
@@ -28,7 +27,7 @@ var capitalNameEl = document.querySelector("#capital-name-container");
 var currencyNameEl = document.querySelector("#currency-name-container");
 var countryNameEl = document.querySelector("#country-name-container");
 var imageDisplayEl = document.querySelector("#image-display-container");
-var saveBtnEl = document.querySelector("#save-btn-container");
+var saveBtnEl = document.querySelector("#save-btn");
 
 var savedSearchDisplayEl = document.querySelector("#saved-searches-container");
 
@@ -233,7 +232,7 @@ var displayCountryCurrency = function () {
 };
 
 var displaySaveBtn = function () {
-  saveBtn.style.display = "block";
+  saveBtnEl.style.display = "block";
 };
 
 // saving searches
@@ -242,6 +241,7 @@ var saveSearch = function () {
     name: countryName,
     code: countryCode,
   };
+  console.log(countryName);
   savedCountrySearches.push(countryData);
   localStorage.setItem(
     "savedCountrySearches",
@@ -249,18 +249,30 @@ var saveSearch = function () {
   );
 };
 
-saveBtn.onclick = function () {
+// response.json().then(function (data) {
+//   myLookUpDictionary = data;
+//   // saves a copy of the look up dictionary to localStorage
+//   localStorage.setItem(
+//     "myLookUpDictionary",
+//     JSON.stringify(myLookUpDictionary)
+
+var checkSavedData = function () {
   console.log("button clicked");
   localStorage.getItem("savedCountrySearches");
-  if (savedCountrySearches) {
+  if (savedCountrySearches.length == 0) {
+    saveSearch();
+  } else {
+    console.log("the check for previous save");
     for (var i = 0; i < savedCountrySearches.length; i++) {
       if (countryName === savedCountrySearches[i].name) {
+        console.log("in the middle of checking");
         searchBarErrorEl.textContent = "This search has already been saved!";
-        break;
+        return;
+      } else {
+        saveSearch();
       }
     }
   }
-  saveSearch;
 };
 
 // saved searches modal functionality
@@ -292,3 +304,4 @@ var clearAllSavedSearches = function () {};
 createLookUpDictionary();
 // if the "Search" button is clicked, then the input field text should be used to find the matching country name and country code (iso2)
 searchBtnEl.addEventListener("click", searchInputCheck);
+saveBtnEl.addEventListener("click", checkSavedData);
