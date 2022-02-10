@@ -56,14 +56,13 @@ var resetSearchInput = function () {
   var previousCountryCurrency = document.querySelector(
     "#currency-name-container"
   );
-  var previousSaveBtn = document.querySelector("#save-btn-container");
 
   if (previousCountryNameEl) {
     previousCountryName.innerHTML = "";
     previousCountryImage.innerHTML = "";
     previousCountryCapital.innerHTML = "";
     previousCountryCurrency.innerHTML = "";
-    previousSaveBtn.innerHTML = "";
+    saveBtnEl.style.display = "none";
   }
 };
 // function creates the look up dictionary to compare user input against the country name in order to obtain the country code(iso2)
@@ -268,11 +267,20 @@ var checkSavedData = function () {
         console.log("in the middle of checking");
         searchBarErrorEl.textContent = "This search has already been saved!";
         return;
-      } else {
-        saveSearch();
       }
     }
+    saveSearch();
   }
+};
+
+var loadPreviousSavedSearches = function () {
+  var savedData = localStorage.getItem("savedCountrySearches");
+  console.log("saved searches loading?");
+  if (!savedData) {
+    return false;
+  }
+  console.log("saved searches loaded");
+  savedCountrySearches = JSON.parse(savedData);
 };
 
 // saved searches modal functionality
@@ -302,6 +310,7 @@ window.onclick = function (event) {
 var clearAllSavedSearches = function () {};
 
 createLookUpDictionary();
+loadPreviousSavedSearches();
 // if the "Search" button is clicked, then the input field text should be used to find the matching country name and country code (iso2)
 searchBtnEl.addEventListener("click", searchInputCheck);
 saveBtnEl.addEventListener("click", checkSavedData);
