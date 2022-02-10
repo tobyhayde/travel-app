@@ -279,6 +279,14 @@ var loadPreviousSavedSearches = function () {
 savedSearchesBtnEl.onclick = function () {
   savedSearchesModalEl.style.display = "block";
   savedSearchDisplayEl.innerHTML = "";
+
+  // this creates the "Clear All Saved Searches" button
+  var clearSavedSearchesBtn = document.createElement("button");
+  clearSavedSearchesBtn.className = "button";
+  clearSavedSearchesBtn.setAttribute("id", "clear-saved-searches-btn");
+  clearSavedSearchesBtn.innerHTML = "Clear All Saved Searches";
+  savedSearchDisplayEl.appendChild(clearSavedSearchesBtn);
+  clearSavedSearchesBtn.addEventListener("click", clearAllSavedSearches, false);
   checkForSavedData();
 };
 
@@ -324,7 +332,16 @@ var checkForSavedData = function () {
 };
 
 // When clicking on the "Clear All Saved Searches" button, the array holding the saved data should be reset
-var clearAllSavedSearches = function () {};
+var clearAllSavedSearches = function () {
+  savedSearchesModalEl.style.display = "none";
+  savedSearchDisplayEl.innerHTML = "";
+  savedCountrySearches = [];
+  localStorage.setItem(
+    "savedCountrySearches",
+    JSON.stringify(savedCountrySearches)
+  );
+  checkForSavedData();
+};
 
 // When the user clicks on the "X" in the upper-right corner, the modal should close
 closeBtn.onclick = function () {
