@@ -1,23 +1,34 @@
 var myLookUpDictionary = [];
+
 var countryCode = "";
 var countryName = "";
 var countryCapital = "";
 var countryCurrency = "";
+
 var imageSource = "";
 var imageSrcAltText = "";
 var imageSrcAuthor = "";
 var imageSrcAuthorURL = "";
 var pictureData = [];
 var pictureDataSrc = "";
+
 var searchBarInput = "";
+
+var savedCountySearches = [];
+var savedSearchesModalEl = document.getElementById("savedSearchesModal");
+var savedSearchesBtnEl = document.getElementById("savedSearchesBtn");
+var closeBtn = document.getElementsByClassName("close")[0];
 
 var searchBarInputEl = document.querySelector("#search-bar-input");
 var searchBarErrorEl = document.querySelector("#search-bar-error");
 var searchBtnEl = document.querySelector("#search-btn");
+
 var capitalNameEl = document.querySelector("#capital-name-container");
 var currencyNameEl = document.querySelector("#currency-name-container");
 var countryNameEl = document.querySelector("#country-name-container");
 var imageDisplayEl = document.querySelector("#image-display-container");
+
+var savedSearchDisplayEl = document.querySelector("#saved-searches-container");
 
 // formats the input from the text search field to match it with the name key/value pair from the countrystatecity api.
 // I used the format of the code from this stackoverflow chain: https://stackoverflow.com/questions/32589197/how-can-i-capitalize-the-first-letter-of-each-word-in-a-string-using-javascript
@@ -218,14 +229,28 @@ var displayCountryCurrency = function () {
   currencyNameEl.appendChild(currencyName);
 };
 
-// saved searches modal functionality
-var savedSearchesModalEl = document.getElementById("savedSearchesModal");
-var savedSearchesBtnEl = document.getElementById("savedSearchesBtn");
-var closeBtn = document.getElementsByClassName("close")[0];
+// saving searches
+var saveSearch = function () {
+  var countryData = {
+    name: countryName,
+    code: countryCode,
+  };
+  savedCountySearches.push(countryData);
+  localStorage.setItem(
+    "savedCountySearches",
+    JSON.stringify(savedCountySearches)
+  );
+};
 
-// When the user clicks the "Saved Searches" button, the modal should open
+// saved searches modal functionality
+
+// When the user clicks the "Saved Searches" button, the modal should open and either display an error message or all of the saved search data
 savedSearchesBtnEl.onclick = function () {
   savedSearchesModalEl.style.display = "block";
+
+  if (!savedSearches) {
+    savedSearchDisplayEl.textContent = "There are no saved searches.";
+  }
 };
 
 // When the user clicks on the "X" in the upper-right corner, the modal should close
@@ -239,6 +264,9 @@ window.onclick = function (event) {
     savedSearchesModalEl.style.display = "none";
   }
 };
+
+// When clicking on the "Clear All Saved Searches" button, the array holding the saved data should be reset
+var clearAllSavedSearches = function () {};
 
 createLookUpDictionary();
 // if the "Search" button is clicked, then the input field text should be used to find the matching country name and country code (iso2)
