@@ -278,9 +278,17 @@ var loadPreviousSavedSearches = function () {
 // When the user clicks the "Saved Searches" button, the modal should open and either display an error message or all of the saved search data
 savedSearchesBtnEl.onclick = function () {
   savedSearchesModalEl.style.display = "block";
+  savedSearchDisplayEl.innerHTML = "";
+  checkForSavedData();
+};
 
-  if (!savedCountrySearches) {
-    savedSearchDisplayEl.textContent = "There are no saved searches.";
+var checkForSavedData = function () {
+  if (!savedCountrySearches || savedCountrySearches.length === 0) {
+    var noSavedSearches = document.createElement("div");
+    noSavedSearches.setAttribute("id", "no-saved-data-message");
+    noSavedSearches.innerHTML = "<p>There are no saved searches.</p>";
+
+    savedSearchDisplayEl.appendChild(noSavedSearches);
   }
 };
 
