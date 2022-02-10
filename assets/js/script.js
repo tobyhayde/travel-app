@@ -218,6 +218,28 @@ var displayCountryCurrency = function () {
   currencyNameEl.appendChild(currencyName);
 };
 
+// saved searches modal functionality
+var savedSearchesModalEl = document.getElementById("savedSearchesModal");
+var savedSearchesBtnEl = document.getElementById("savedSearchesBtn");
+var closeBtn = document.getElementsByClassName("close")[0];
+
+// When the user clicks the "Saved Searches" button, the modal should open
+savedSearchesBtnEl.onclick = function () {
+  savedSearchesModalEl.style.display = "block";
+};
+
+// When the user clicks on the "X" in the upper-right corner, the modal should close
+closeBtn.onclick = function () {
+  savedSearchesModalEl.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, the modal should close
+window.onclick = function (event) {
+  if (event.target == savedSearchesModalEl) {
+    savedSearchesModalEl.style.display = "none";
+  }
+};
+
 createLookUpDictionary();
 // if the "Search" button is clicked, then the input field text should be used to find the matching country name and country code (iso2)
 searchBtnEl.addEventListener("click", searchInputCheck);
