@@ -14,7 +14,8 @@ var pictureDataSrc = "";
 
 var searchBarInput = "";
 
-var savedCountySearches = [];
+var saveBtn = document.querySelector("#save-btn");
+var savedCountrySearches = [];
 var savedSearchesModalEl = document.getElementById("savedSearchesModal");
 var savedSearchesBtnEl = document.getElementById("savedSearchesBtn");
 var closeBtn = document.getElementsByClassName("close")[0];
@@ -232,11 +233,7 @@ var displayCountryCurrency = function () {
 };
 
 var displaySaveBtn = function () {
-  var saveBtn = document.createElement("button");
-  saveBtn.setAttribute("id", "save-btn");
-  saveBtn.textContent = "Save";
-
-  saveBtnEl.appendChild(saveBtn);
+  saveBtn.style.display = "block";
 };
 
 // saving searches
@@ -245,11 +242,25 @@ var saveSearch = function () {
     name: countryName,
     code: countryCode,
   };
-  savedCountySearches.push(countryData);
+  savedCountrySearches.push(countryData);
   localStorage.setItem(
-    "savedCountySearches",
-    JSON.stringify(savedCountySearches)
+    "savedCountrySearches",
+    JSON.stringify(savedCountrySearches)
   );
+};
+
+saveBtn.onclick = function () {
+  console.log("button clicked");
+  localStorage.getItem("savedCountrySearches");
+  if (savedCountrySearches) {
+    for (var i = 0; i < savedCountrySearches.length; i++) {
+      if (countryName === savedCountrySearches[i].name) {
+        searchBarErrorEl.textContent = "This search has already been saved!";
+        break;
+      }
+    }
+  }
+  saveSearch;
 };
 
 // saved searches modal functionality
@@ -258,7 +269,7 @@ var saveSearch = function () {
 savedSearchesBtnEl.onclick = function () {
   savedSearchesModalEl.style.display = "block";
 
-  if (!savedSearches) {
+  if (!savedCountrySearches) {
     savedSearchDisplayEl.textContent = "There are no saved searches.";
   }
 };

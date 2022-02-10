@@ -17,6 +17,11 @@
   width: 100%;
 }
 
+/* Save button */
+.save-btn {
+  display: none;
+}
+
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
