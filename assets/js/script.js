@@ -153,18 +153,17 @@ var searchInputCheck = function () {
     // calls the function to reformat user input in case it doesn't match the myLookUpDictionary names
     formatUserInput();
     // loop through myLookUpDictionary to see if user input matches with any country names
-    for (var i = 0; i < myLookUpDictionary.length + 1; i++) {
-      if (i === 250) {
-        // if there is no match found, then the error div by the search bar area should populate with only the following error message: "No results found. Please check that the country name is spelled correctly or try a different country name!"
-        searchBarErrorEl.textContent =
-          "No results found. Please check that the country name is spelled correctly or try a different country name!";
-      } else if (searchBarInput === myLookUpDictionary[i].name) {
+    for (var i = 0; i < myLookUpDictionary.length; i++) {
+      if (searchBarInput === myLookUpDictionary[i].name) {
         // if a match is found, then the code should pull in the country name and the iso2 country code from the myLookUpDictionary and populate the variables
         countryCode = myLookUpDictionary[i].iso2;
         getCountryData(countryCode);
-        break;
+        return;
       }
     }
+    // if there is no match found, then the error div by the search bar area should populate with only the following error message: "No results found. Please check that the country name is spelled correctly or try a different country name!"
+    searchBarErrorEl.textContent =
+      "No results found. Please check that the country name is spelled correctly or try a different country name!";
   }
 };
 
@@ -240,7 +239,6 @@ var saveSearch = function () {
     name: countryName,
     code: countryCode,
   };
-  console.log(countryName);
   savedCountrySearches.push(countryData);
   localStorage.setItem(
     "savedCountrySearches",
@@ -248,23 +246,15 @@ var saveSearch = function () {
   );
 };
 
-// response.json().then(function (data) {
-//   myLookUpDictionary = data;
-//   // saves a copy of the look up dictionary to localStorage
-//   localStorage.setItem(
-//     "myLookUpDictionary",
-//     JSON.stringify(myLookUpDictionary)
-
 var checkSavedData = function () {
-  console.log("button clicked");
   localStorage.getItem("savedCountrySearches");
+  // if there is no data inside of the saved data, then it proceeds to save the current data
   if (savedCountrySearches.length == 0) {
     saveSearch();
   } else {
-    console.log("the check for previous save");
+    // checks to see if the country has previously been saved to the saved data array. if it has, then it displays an error message and returns out of the function.
     for (var i = 0; i < savedCountrySearches.length; i++) {
       if (countryName === savedCountrySearches[i].name) {
-        console.log("in the middle of checking");
         searchBarErrorEl.textContent = "This search has already been saved!";
         return;
       }
@@ -275,11 +265,11 @@ var checkSavedData = function () {
 
 var loadPreviousSavedSearches = function () {
   var savedData = localStorage.getItem("savedCountrySearches");
-  console.log("saved searches loading?");
+  // if there is no saved data, then it returns out of this function
   if (!savedData) {
     return false;
   }
-  console.log("saved searches loaded");
+  // if there is saved data, it reassigns the saved data array variable with the saved data
   savedCountrySearches = JSON.parse(savedData);
 };
 
