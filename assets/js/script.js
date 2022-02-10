@@ -27,6 +27,7 @@ var capitalNameEl = document.querySelector("#capital-name-container");
 var currencyNameEl = document.querySelector("#currency-name-container");
 var countryNameEl = document.querySelector("#country-name-container");
 var imageDisplayEl = document.querySelector("#image-display-container");
+var saveBtnEl = document.querySelector("#save-btn-container");
 
 var savedSearchDisplayEl = document.querySelector("#saved-searches-container");
 
@@ -55,12 +56,14 @@ var resetSearchInput = function () {
   var previousCountryCurrency = document.querySelector(
     "#currency-name-container"
   );
+  var previousSaveBtn = document.querySelector("#save-btn-container");
 
   if (previousCountryNameEl) {
     previousCountryName.innerHTML = "";
     previousCountryImage.innerHTML = "";
     previousCountryCapital.innerHTML = "";
     previousCountryCurrency.innerHTML = "";
+    previousSaveBtn.innerHTML = "";
   }
 };
 // function creates the look up dictionary to compare user input against the country name in order to obtain the country code(iso2)
@@ -86,7 +89,6 @@ var createLookUpDictionary = function () {
     // loads the copy of the look up dictionary from the user's localStorage
     var storedLookUpDictionary = localStorage.getItem("myLookUpDictionary");
     myLookUpDictionary = JSON.parse(storedLookUpDictionary);
-    console.log(myLookUpDictionary);
     return;
   }
 };
@@ -106,6 +108,7 @@ var getCountryData = function (countryCode) {
       displayCountryName(countryName);
       displayCountryCapital(countryCapital);
       displayCountryCurrency(countryCurrency);
+      displaySaveBtn();
 
       // removes the user input from the search text field
       searchBarInputEl.value = "";
@@ -158,7 +161,6 @@ var searchInputCheck = function () {
           "No results found. Please check that the country name is spelled correctly or try a different country name!";
       } else if (searchBarInput === myLookUpDictionary[i].name) {
         // if a match is found, then the code should pull in the country name and the iso2 country code from the myLookUpDictionary and populate the variables
-        console.log(searchBarInput);
         countryCode = myLookUpDictionary[i].iso2;
         getCountryData(countryCode);
         break;
@@ -227,6 +229,14 @@ var displayCountryCurrency = function () {
 
   currencyNameEl.appendChild(currencyHeader);
   currencyNameEl.appendChild(currencyName);
+};
+
+var displaySaveBtn = function () {
+  var saveBtn = document.createElement("button");
+  saveBtn.setAttribute("id", "save-btn");
+  saveBtn.textContent = "Save";
+
+  saveBtnEl.appendChild(saveBtn);
 };
 
 // saving searches
