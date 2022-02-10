@@ -30,6 +30,7 @@ var imageDisplayEl = document.querySelector("#image-display-container");
 var saveBtnEl = document.querySelector("#save-btn");
 
 var savedSearchDisplayEl = document.querySelector("#saved-searches-container");
+var savedCountryBtnEl = document.getElementsByClassName("saved-country-btn");
 
 // formats the input from the text search field to match it with the name key/value pair from the countrystatecity api.
 // I used the format of the code from this stackoverflow chain: https://stackoverflow.com/questions/32589197/how-can-i-capitalize-the-first-letter-of-each-word-in-a-string-using-javascript
@@ -284,13 +285,34 @@ savedSearchesBtnEl.onclick = function () {
 
 var checkForSavedData = function () {
   if (!savedCountrySearches || savedCountrySearches.length === 0) {
+    console.log("nothing here, brah");
     var noSavedSearches = document.createElement("div");
     noSavedSearches.setAttribute("id", "no-saved-data-message");
     noSavedSearches.innerHTML = "<p>There are no saved searches.</p>";
 
     savedSearchDisplayEl.appendChild(noSavedSearches);
+  } else {
+    for (var i = 0; i < savedCountrySearches.length; i++) {
+      console.log("you found something!");
+      countryName = savedCountrySearches[i].name;
+      countryCode = savedCountrySearches[i].code;
+      var savedSearchBox = document.createElement("button");
+      savedSearchBox.className = "saved-country-btn";
+      savedSearchBox.setAttribute("id", countryCode);
+      savedSearchBox.innerHTML = "<p>" + countryName + "</p>";
+
+      savedSearchDisplayEl.appendChild(savedSearchBox);
+    }
   }
 };
+
+var loadSavedSearch = function () {
+  savedSearchesModalEl.style.display = "none";
+  countryName = getCountryData(countryCode);
+};
+
+// When clicking on the "Clear All Saved Searches" button, the array holding the saved data should be reset
+var clearAllSavedSearches = function () {};
 
 // When the user clicks on the "X" in the upper-right corner, the modal should close
 closeBtn.onclick = function () {
@@ -303,9 +325,6 @@ window.onclick = function (event) {
     savedSearchesModalEl.style.display = "none";
   }
 };
-
-// When clicking on the "Clear All Saved Searches" button, the array holding the saved data should be reset
-var clearAllSavedSearches = function () {};
 
 createLookUpDictionary();
 loadPreviousSavedSearches();
