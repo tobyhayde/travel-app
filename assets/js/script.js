@@ -30,7 +30,6 @@ var imageDisplayEl = document.querySelector("#image-display-container");
 var saveBtnEl = document.querySelector("#save-btn");
 
 var savedSearchDisplayEl = document.querySelector("#saved-searches-container");
-var savedCountryBtnEl = document.getElementsByClassName("saved-country-btn");
 
 // formats the input from the text search field to match it with the name key/value pair from the countrystatecity api.
 // I used the format of the code from this stackoverflow chain: https://stackoverflow.com/questions/32589197/how-can-i-capitalize-the-first-letter-of-each-word-in-a-string-using-javascript
@@ -283,6 +282,11 @@ savedSearchesBtnEl.onclick = function () {
   checkForSavedData();
 };
 
+var loadSavedData = function () {
+  var savedCountryCode = this.getAttribute("id");
+  console.log(savedCountryCode);
+};
+
 var checkForSavedData = function () {
   if (!savedCountrySearches || savedCountrySearches.length === 0) {
     console.log("nothing here, brah");
@@ -297,18 +301,20 @@ var checkForSavedData = function () {
       countryName = savedCountrySearches[i].name;
       countryCode = savedCountrySearches[i].code;
       var savedSearchBox = document.createElement("button");
-      savedSearchBox.className = "saved-country-btn";
+      savedSearchBox.className = "button saved-country-btn";
       savedSearchBox.setAttribute("id", countryCode);
       savedSearchBox.innerHTML = "<p>" + countryName + "</p>";
 
       savedSearchDisplayEl.appendChild(savedSearchBox);
     }
-  }
-};
 
-var loadSavedSearch = function () {
-  savedSearchesModalEl.style.display = "none";
-  countryName = getCountryData(countryCode);
+    var savedCountryBtnEl =
+      document.getElementsByClassName("saved-country-btn");
+    for (var i = 0; i < savedCountryBtnEl.length; i++) {
+      console.log(savedCountryBtnEl[i]);
+      savedCountryBtnEl[i].addEventListener("click", loadSavedData, false);
+    }
+  }
 };
 
 // When clicking on the "Clear All Saved Searches" button, the array holding the saved data should be reset
