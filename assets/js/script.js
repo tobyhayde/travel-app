@@ -121,3 +121,4 @@ var displayCountryCurrency = function () {
 createLookUpDictionary();
 // if the "Search" button is clicked, then the input field text should be used to find the matching country name and country code (iso2)
 searchBtnEl.addEventListener("click", searchInputCheck);
+
