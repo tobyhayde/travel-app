@@ -64,3 +64,16 @@
 .saved-country-btn {
   width: 100%;
 }
+/*search error box styling*/
+.search-error-box {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+.search-error {
+    width: 35%;
+    background-color: red;
+    border-radius: 20px;
+}

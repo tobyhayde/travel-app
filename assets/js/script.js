@@ -162,8 +162,8 @@ var searchInputCheck = function () {
       }
     }
     // if there is no match found, then the error div by the search bar area should populate with only the following error message: "No results found. Please check that the country name is spelled correctly or try a different country name!"
-    searchBarErrorEl.textContent =
-      "No results found. Please check that the country name is spelled correctly or try a different country name!";
+    searchBarErrorEl.innerHTML =
+      "No results found! <br> Please check that the country name is spelled correctly or try a different country name!";
   }
 };
 
