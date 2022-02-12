@@ -22,6 +22,10 @@
   display: none;
 }
 
+.save-btn-box {
+    display: flex;
+    justify-content: center;
+}
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -76,4 +80,17 @@
     width: 35%;
     background-color: red;
     border-radius: 20px;
+}
+
+body {
+    background-color:rgba(0, 132, 255, 0.699);
+}
+
+.card, .card-divider {
+    background-color: aquamarine;
+}
+
+h1 {
+    color:#1779ba;
+    font-weight:600;
 }

@@ -5447,7 +5447,7 @@ a.thumbnail {
           flex-wrap: wrap; }
   .top-bar,
   .top-bar ul {
-    background-color: grey; }
+    background-color: rgb(184, 179, 179); }
   .top-bar input {
     max-width: 200px;
     margin-right: 1rem; }
