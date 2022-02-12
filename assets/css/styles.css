@@ -93,8 +93,8 @@ body {
     background-color:rgba(0, 132, 255, 0.699);
 }
 
-.card, .card-divider {
-    background-color: aquamarine;
+.card, .card-divider, .card-section {
+    background-color: rgb(228, 227, 227);
 }
 
 h1 {

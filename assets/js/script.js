@@ -34,7 +34,7 @@ var savedSearchDisplayEl = document.querySelector("#saved-searches-container");
 // formats the input from the text search field to match it with the name key/value pair from the countrystatecity api.
 // I used the format of the code from this stackoverflow chain: https://stackoverflow.com/questions/32589197/how-can-i-capitalize-the-first-letter-of-each-word-in-a-string-using-javascript
 var formatUserInput = function () {
-  searchBarInput = searchBarInputEl.value;
+  searchBarInput = searchBarInputEl.value.trim();
   var splitWords = searchBarInput.toLowerCase().split(" ");
 
   for (var i = 0; i < splitWords.length; i++) {
