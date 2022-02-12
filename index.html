@@ -5,24 +5,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TRAVELIST</title>
-    <link rel="stylesheet" href="assets\css\foundation.css">
-    <link rel="stylesheet" href="assets\css\app.css">
+    <link rel="stylesheet" href="assets\css\foundation.min.css">
     <link rel="stylesheet" href="assets\css\styles.css">
 </head>
 <body>
     <div class="top-bar">
         <div class="top-bar-left">
-            <ul class="dropdown menu" data-dropdown-menu>
-                <li class="menu-text">TRAVELIST</li>
-            </ul>
-    </div>
-    <div class="top-bar-right">
-        <ul class="menu">
-          <li><input type="search" placeholder="Search"></li>
-          <li><button type="button" class="button">Search</button></li>
-        </ul>
-    </div>
+            <div class="dropdown-menu" data-dropdown-menu>
+                <h1 class="menu-text">TRAVELIST</h1>
+            </div>
+        </div>
     
-    <script src="./assets/script.js"></script>
+    <div class="top-bar-right">
+        <div class="menu">
+          <input id="search-bar-input" type="search" placeholder="Country Name Here">
+          <button id="search-btn" type="button" class="button">Search</button>
+        </div>
+    </div>
+    </div>
+    <br>
+    <!-- Saved Searches Modal -->
+
+    <button class="button" id="savedSearchesBtn">Saved Searches</button>
+
+    <div id="savedSearchesModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Saved Searches</h2>
+            <div id="saved-searches-container"></div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="search-error-box">
+        <h3 class="search-error" id="search-bar-error"></h3>
+    </div>
+    <div class="flex-container align-center">
+    <div id="search-results-container" class="card flex-container flex-dir-column text-center" style="max-width: 600px; height: 700px;">
+        <div id="country-name-container" class="card-divider align-center menu-text">
+        </div>
+        <div id="image-display-container">
+        </div>
+        <div id="capital-name-container">
+        </div>
+        <div id="currency-name-container">
+        </div>
+        <div class="save-btn-box" id="save-btn-container">
+            <button id="save-btn" class="button save-btn">Save</button>
+        </div>
+    </div>
+    </div>
+    <br>
+    <br>
+    <div id="footer">
+        TRAVELIST &copy;
+    </div>
+
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
