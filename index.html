@@ -12,32 +12,40 @@
 <body>
     <div class="top-bar">
         <div class="top-bar-left">
-            <ul class="dropdown menu" data-dropdown-menu>
-                <li class="menu-text">TRAVELIST</li>
-            </ul>
-    </div>
-    <div class="top-bar-right">
-        <ul class="menu">
-          <li><input id="search-bar-input" type="search" placeholder="Search"></li>
-          <li><button id="search-btn" type="button" class="button">Search</button></li>
-        </ul>
-    </div>
-    </div>
-    <br>
-    <br>
-    <br>
-    <div>
-        <p id="search-bar-error"></p>
-    </div>
-    <div id="search-results-container" class="flex-container flex-dir-column text-center">
-        <div id="country-name-container">
+            <div class="dropdown menu" data-dropdown-menu>
+                <h1 class="menu-text">TRAVELIST</h1>
+            </div>
         </div>
-        <div id="capital-name-container">
+    
+    <div class="top-bar-right">
+        <div class="menu">
+          <input id="search-bar-input" type="search" placeholder="Country Name Here">
+          <button id="search-btn" type="button" class="button">Search</button>
+        </div>
+    </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="search-error-box">
+        <h2 class="search-error" id="search-bar-error"></h2>
+    </div>
+    <div class="flex-container align-center">
+    <div id="search-results-container" class="card flex-container flex-dir-column text-center" style="max-width: 600px; height: 700px;">
+        <div id="country-name-container" class="card-divider align-center menu-text">
         </div>
         <div id="image-display-container">
         </div>
+        <div id="capital-name-container">
+        </div>
         <div id="currency-name-container">
         </div>
+    </div>
+    </div>
+    <div class="flex-container align-right">
+    <div id="saved-search-results-container" class="flex-container flex-dir-column text-center">
+        <h4>saved search box</h4>
+    </div>
     </div>
     <div id="footer">
         TRAVELIST &copy;

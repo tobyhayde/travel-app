@@ -16,3 +16,14 @@
     text-align: center;
     width: 100%;
 }
+
+.search-error-box {
+    display: flex;
+    justify-content: center;
+}
+
+.search-error {
+    width: 35%;
+    background-color: red;
+    box-sizing: border-box;
+}
