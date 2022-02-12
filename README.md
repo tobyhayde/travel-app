@@ -29,10 +29,15 @@ Link to URL:
 https://tobyhayde.github.io/travel-app/
 #
 Collaborators: 
+
 Shannon Stover @sstover25
+
 Tania Orozco @torozcmh
+
 Andrew Armstrong @Aaandrew1
+
 Toby Hayde @tobyhayde
+
 
 
 
